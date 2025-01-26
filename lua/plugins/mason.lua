@@ -48,7 +48,9 @@ return {
         lsp.clangd.setup(default_args)
 
 
-
+        --------------------------
+        -- Javascript / ecmascript
+        --------------------------
         lsp.eslint.setup({
             capabilities = default_caps,
             on_attach = default_on_attach,
@@ -69,6 +71,17 @@ return {
                 report_unused_disable_directives = false,
                 run_on = "type", -- or `save`
             },
+        })
+
+
+        ----------------------
+        --Grammar and spelling
+        ----------------------
+        lsp.ltex.setup({
+            on_attach = default_on_attach,
+            cmd = { "ltex-ls" },
+            filetypes = { "markdown", "text" },
+            flags = { debounce_text_changes = 300 },
         })
 
 
