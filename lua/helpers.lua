@@ -1,27 +1,26 @@
-local _v = vim -- make linter happy
-local cmd = _v.api.nvim_create_user_command
+local cmd = vim.api.nvim_create_user_command
 
 local M = {
     dump = function(...)
-        print(_v.inspect(...))
+        print(vim.inspect(...))
     end,
 
     trim = function()
-        _v.cmd [[%s/\s\+$//e]]
-        _v.cmd [[noh]]
+        vim.cmd [[%s/\s\+$//e]]
+        vim.cmd [[noh]]
     end,
 
     mk_parent_dirs = function()
-        local dir = _v.fn.expand('<afile>:p:h')
+        local dir = vim.fn.expand('<afile>:p:h')
 
         -- This handles URLs using netrw. See ':help netrw-transparent' for details.
         if dir:find('%l+://') == 1 then
             return
         end
 
-        if _v.fn.isdirectory(dir) == 0 then
-            _v.fn.mkdir(dir, 'p')
-            _v.notify(dir, vim.log.levels.INFO, { title = "Created parent directories", })
+        if vim.fn.isdirectory(dir) == 0 then
+            vim.fn.mkdir(dir, 'p')
+            vim.notify(dir, vim.log.levels.INFO, { title = "Created parent directories", })
         end
     end
 }

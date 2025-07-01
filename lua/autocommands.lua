@@ -1,8 +1,6 @@
-local _v = vim -- make linter happy
-
-local api = _v.api
-local cmd = _v.api.nvim_create_autocmd
-local group = _v.api.nvim_create_augroup
+local api = vim.api
+local cmd = vim.api.nvim_create_autocmd
+local group = vim.api.nvim_create_augroup
 local helpers = require("helpers")
 
 
@@ -18,8 +16,8 @@ cmd(
         pattern = { "*" },
         group = group("MkDir", { clear = true }),
         callback = function()
-            helpers.mk_parent_dirs()
-            helpers.trim()
+            helpers.mk_parent_dirs() -- create parent directories when saving a new file
+            helpers.trim()           -- trim trailing whitespace from every line.
         end,
     }
 )
