@@ -1,0 +1,4 @@
+function diller() {
+
+    return "fisse";
+}

@@ -47,10 +47,11 @@ which_key.add({
     { "<leader>a",           "ggVG",                                                         desc = "Select all" },
 
     { "½",                   "^",                                                            desc = "Go to start of line" },
+    { "<leader>$",           "^",                                                            desc = "Go to start of line" },
     { "<leader>½",           "$",                                                            desc = "Go to end of line" },
 
     { "<leader><backspace>", "<cmd>qa!<cr>",                                                 desc = "Close vim without saving!" },
-    { "<leader>w",           "<cmd>update<cr>",                                              desc = "Save current buffer" },
+    { "<leader>s",           "<cmd>update<cr>",                                              desc = "Save current buffer" },
     { "<leader>f",           "<cmd>NvimTreeToggle<cr>",                                      desc = "Toggle file explorer" },
 
 
@@ -62,6 +63,8 @@ which_key.add({
 
     { "<leader>q",           "<cmd>bd<cr>",                                                  desc = "Close buffer" },
     { "<leader>Q",           "<cmd>bd!<cr>",                                                 desc = "Close buffer without saving" },
+
+    { "<leader>o",           "<cmd>!open %<cr>",                                             desc = "Make the OS open the file" },
 
     -----------------------------
     -- Telescope

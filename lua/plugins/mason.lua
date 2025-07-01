@@ -1,6 +1,7 @@
 local formatting_group = vim.api.nvim_create_augroup("LspFormatting", {})
 
-local default_on_attach = function(client, bufnr)
+--{{{
+local default_attach = function(client, bufnr)
     if client.supports_method("textDocument/formatting") then
         vim.api.nvim_clear_autocmds({
             group = formatting_group,
@@ -15,37 +16,37 @@ local default_on_attach = function(client, bufnr)
         })
     end
 end
+--}}}
 
 return {
-    "williamboman/mason.nvim",
+    "mason-org/mason-lspconfig.nvim",
+    opts = {},
     dependencies = {
-        "williamboman/mason-lspconfig.nvim",
+        "mason-org/mason.nvim",
         "hrsh7th/nvim-cmp",
         "jose-elias-alvarez/null-ls.nvim",
         "neovim/nvim-lspconfig",
     },
     config = function()
         require("mason").setup()
-        require("mason-lspconfig").setup({
-            ensure_installed = {
-                "lua_ls",
-                "gopls",
-                "eslint",
-                "jsonls",
-            }
-        })
-
         local lsp = require("lspconfig")
         local util = require "lspconfig/util"
         local default_caps = require('cmp_nvim_lsp').default_capabilities()
         local default_args = {
             capabilities = default_caps,
-            on_attach = default_on_attach,
+            on_attach = default_attach,
         }
 
+        --------------------------
+        -- JSON
+        --------------------------
         lsp.jsonls.setup(default_args)
-        -- lsp.eslint.setup(default_args)
-        lsp.clangd.setup(default_args)
+
+
+        --------------------------
+        -- CLANGD
+        --------------------------
+        -- lsp.clangd.setup(default_args)
 
 
         --------------------------
@@ -53,7 +54,7 @@ return {
         --------------------------
         lsp.eslint.setup({
             capabilities = default_caps,
-            on_attach = default_on_attach,
+            on_attach = default_attach,
             bin = 'eslint', -- or `eslint_d`
             code_actions = {
                 enable = true,
@@ -77,12 +78,13 @@ return {
         ----------------------
         --Grammar and spelling
         ----------------------
-        lsp.ltex.setup({
-            on_attach = default_on_attach,
-            cmd = { "ltex-ls" },
-            filetypes = { "markdown", "text" },
-            flags = { debounce_text_changes = 300 },
-        })
+        --- It became altogether too much.
+        -- lsp.ltex.setup({
+        --     on_attach = default_on_attach,
+        --     cmd = { "ltex-ls" },
+        --     filetypes = { "markdown", "text", "asciidoc" },
+        --     flags = { debounce_text_changes = 300 },
+        -- })
 
 
         ------------------------
@@ -90,7 +92,7 @@ return {
         ------------------------
         lsp.lua_ls.setup({
             capabilities = default_caps,
-            on_attach = default_on_attach,
+            on_attach = default_attach,
             root_dir = util.root_pattern("meta.lua", "init.lua", "main.lua"),
             settings = {
                 Lua = {
@@ -127,8 +129,6 @@ return {
                 },
             },
             on_attach = function(client, bufnr)
-                -- Enable completion triggered by <c-x><c-o>
-                vim.api.nvim_buf_set_option(bufnr, 'omnifunc', 'v:lua.vim.lsp.omnifunc')
                 vim.opt.foldmethod = "syntax"
                 vim.opt.foldlevel = 20
 
@@ -138,7 +138,7 @@ return {
                     ["<F9>"] = { "<cmd>!go fmt %<cr>", "go fmt" },
                 })
 
-                default_on_attach(client, bufnr)
+                default_attach(client, bufnr)
             end
         })
     end,
