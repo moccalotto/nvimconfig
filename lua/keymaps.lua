@@ -61,6 +61,7 @@ which_key.add({
     { "<leader><space>z",    desc = "Are you sure you want to quit without saving? " },
     { "<leader><space>zz",   "<cmd>qa!<cr>",                                                 desc = "Exit without saving" },
 
+    { "<leader>c",           "<cmd>close<cr>",                                               desc = "Close window" },
     { "<leader>q",           "<cmd>bd<cr>",                                                  desc = "Close buffer" },
     { "<leader>Q",           "<cmd>bd!<cr>",                                                 desc = "Close buffer without saving" },
 

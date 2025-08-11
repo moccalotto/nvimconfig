@@ -1,10 +1,7 @@
-local _v = vim -- make linter happy
-
 local default_options = {
     --  timeoutlen = 250, -- time to wait for a mapped sequence to complete (in milliseconds)
     -- guifont = "monofur mono for Powerline:h6", -- the font used in graphical neovim applications
     -- hidden = true, -- required to keep multiple buffers and open multiple buffers
-    -- listchars = "eol:↴,nbsp:+,space:⋅,tab:> ,trail:⋅",
     -- shadafile =
     -- showmode = false, -- we don't need to see things like -- INSERT -- anymore
     -- signcolumn = "yes:1", -- always show the sign column, otherwise it would shift the text each time
@@ -24,7 +21,16 @@ local default_options = {
     hlsearch       = true, -- highlight all matches on previous search pattern
     ignorecase     = true, -- ignore case in search patterns
     list           = true,
-    listchars      = "tab:▹ ,trail:·,nbsp:⚋",
+    listchars      = {
+        -- eol = "⤶",
+        tab = "▹ ", -- tab must be two or three characters
+        trail = "·", -- trailing space
+        nbsp = "⍽", -- non breaking space
+        -- "⍽"      APL Functional Symbol Circle Backslash (often used to indicate space)
+        -- "␣"      Open Box (commonly used to represent a space character)
+        -- "·"      Middle Dot (often used in editors to show regular spaces)
+        -- "⎵"      Bottom Square Bracket (more boxy/clear visually)
+    },
     mouse          = "a",   -- allow the mouse to be used in neovim
     number         = true,  -- set numbered lines
     numberwidth    = 3,     -- width of number column
@@ -52,13 +58,13 @@ local default_options = {
     spell          = true,
 }
 
-local opt = _v.opt
+local opt = vim.opt
 
 ---  SETTINGS  ---
 -- opt.shortmess:append "c" -- don't show redundant messages from ins-completion-menu
 -- opt.shortmess:append "I" -- don't show the default intro message
 opt.whichwrap:append "<,>,[,],h,l"
-if _v.api.nvim_list_uis() == 0 then
+if vim.api.nvim_list_uis() == 0 then
     opt.shortmess = ""   -- try to prevent echo from cutting messages off or prompting
     opt.more = false     -- don't pause listing when screen is filled
     opt.cmdheight = 9999 -- helps avoiding |hit-enter| prompts.
@@ -68,12 +74,13 @@ if _v.api.nvim_list_uis() == 0 then
 end
 -- Load all the default options
 for k, v in pairs(default_options) do
-    local ok = pcall(function()
+    local ok, error = pcall(function()
         opt[k] = v
     end)
     if not ok then
-        print(_v.inspect({
+        print(vim.inspect({
             ["Error"] = "ERROR: Could not set option",
+            ["Details"] = error,
             ["k"] = k,
             ["v"] = v,
         }))
@@ -81,11 +88,9 @@ for k, v in pairs(default_options) do
 end
 
 
-local vimcmd = _v.cmd
-
 -- Colorscheme
-vimcmd [[colorscheme __apprentice]]
+vim.cmd [[colorscheme __apprentice]]
 
--- -- Undercurl
-vimcmd [[let &t_Cs = "\e[4:3m"]]
-vimcmd [[let &t_Ce = "\e[4:0m"]]
+-- Undercurl
+vim.cmd [[let &t_Cs = "\e[4:3m"]]
+vim.cmd [[let &t_Ce = "\e[4:0m"]]

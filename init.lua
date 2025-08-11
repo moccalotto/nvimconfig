@@ -1,3 +1,5 @@
+vim.cmd [[scriptencoding utf-8]]
+
 local g_vim = vim -- make linter happy
 
 
