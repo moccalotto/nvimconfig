@@ -1,3 +1,0 @@
-return {
-    'jacoborus/tender.vim'
-}
