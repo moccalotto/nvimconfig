@@ -44,7 +44,6 @@ lazy.setup("plugins", require("lazy_opt"))
 -----------------------------------------------------
 --
 
--- require "autocommands"
 require "neovide"
 require "keymaps"
 require "bossmode"

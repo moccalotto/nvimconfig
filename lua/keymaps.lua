@@ -71,7 +71,6 @@ which_key.add({
     -- Telescope
     -----------------------------
     { "å",                   "<cmd>Telescope find_files<cr>",                                desc = "Find siles by name" },
-    { "<c-p>",               "<cmd>Telescope find_files<cr>",                                desc = "Find siles by name" },
     { "Å",                   "<cmd>Telescope grep_string<cr>",                               desc = "Find files by content" },
     { "-",                   "<cmd>Telescope buffers<cr>",                                   desc = "Search open buffers" },
 

@@ -89,6 +89,9 @@ end
 
 
 -- Colorscheme
+-- Will be overwritten later by the "melange" color scheme
+-- this option is here in case Lazy doesn't load Melange
+-- for some reason.
 vim.cmd [[colorscheme __apprentice]]
 
 -- Undercurl

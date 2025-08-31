@@ -1,5 +1,5 @@
 return {
     'tigion/nvim-asciidoc-preview',
-    ft = { 'asciidoc' },
+    ft = { 'asciidocor' },
     -- opts = {},
 }
