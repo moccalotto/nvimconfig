@@ -108,15 +108,16 @@ which_key.add({
     -- LSP Code Completion / navigation
     ---------------------------------------
     { "<leader>g",           desc = "Code navigation" },
-    { "<leader>gt",          vim.lsp.buf.type_definition,                                    desc = "Goto type definition", },
-    { "<leader>gi",          vim.lsp.buf.implementation,                                     desc = "Go to implementation" },
+    { "<leader>gD",          vim.lsp.buf.declaration,                                        desc = "Goto declaration", },
+    { "<leader>gd",          vim.lsp.buf.definition,                                         desc = "Goto definition" },
     { "<leader>gr",          vim.lsp.buf.references,                                         desc = "Find all references to the current symbol" },
-    { "<leader>gf",          vim.lsp.buf.formatting,                                         desc = "Code formatting", },
-    { "<F2>",                vim.lsp.buf.rename,                                             desc = "Rename all symbols under cursor" },
-    { "<c-k>",               vim.lsp.buf.signature_help,                                     desc = "Show signature help" },
-    { "ø",                   vim.lsp.buf.hover,                                              desc = "Pretend mouse cursor is hovering over word" },
-    { "Ø",                   vim.lsp.buf.references,                                         desc = "Find all references to the current symbol" },
-    { "<F12>",               vim.lsp.buf.definition,                                         desc = "Go to definition" },
+    { "<leader>gi",          vim.lsp.buf.implementation,                                     desc = "Goto implementation" },
+    { "<leader>gt",          vim.lsp.buf.type_definition,                                    desc = "Goto type definition" },
+    { "<leader>rn",          vim.lsp.buf.rename,                                             desc = "Rename symbol" },
+    { "Ø",                   vim.lsp.buf.signature_help,                                     desc = "Show signature help" },
+    { "ø",                   vim.lsp.buf.hover,                                              desc = "Show mouse-hover info" },
+    { "æ",                   vim.lsp.buf.code_action,                                        desc = "Perform code refactor actions" },
+    { "<leader>gf",          vim.lsp.buf.format,                                             desc = "Code format" },
 
     { "<F5>",                "<cmd>make<cr>",                                                desc = "Make" },
 })
