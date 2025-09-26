@@ -38,8 +38,8 @@ return {
                 vim.keymap.set("n", "<leader>rn", vim.lsp.buf.rename, opts)
                 vim.keymap.set("n", "Ø", vim.lsp.buf.implementation, opts)
                 vim.keymap.set("n", "ø", vim.lsp.buf.hover, opts)
-                vim.keymap.set("n", "æ", vim.lsp.buf.code_action, opts)
-                vim.keymap.set("v", "æ", vim.lsp.buf.code_action, opts)
+                vim.keymap.set("n", "Æ", vim.lsp.buf.code_action, opts)
+                vim.keymap.set("v", "Æ", vim.lsp.buf.code_action, opts)
                 vim.keymap.set("n", "<leader>gf", function()
                     vim.lsp.buf.format({ async = true })
                 end, opts)
@@ -183,7 +183,7 @@ return {
         },
         config = function()
             local cmp = require("cmp")
-            local luasnip = require("luasnip")
+            local _ = require("luasnip")
 
             -- Load snippets from friendly-snippets
             require("luasnip.loaders.from_vscode").lazy_load()
@@ -320,4 +320,11 @@ return {
             },
         },
     },
+    {
+        "ray-x/lsp_signature.nvim",
+        event = "InsertEnter",
+        opts = {
+            -- cfg options
+        },
+    }
 }

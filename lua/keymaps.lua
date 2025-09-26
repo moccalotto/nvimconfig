@@ -73,6 +73,7 @@ which_key.add({
     { "å",                   "<cmd>Telescope find_files<cr>",                                desc = "Find siles by name" },
     { "Å",                   "<cmd>Telescope grep_string<cr>",                               desc = "Find files by content" },
     { "-",                   "<cmd>Telescope lsp_document_symbols<cr>",                      desc = "Search for symbols" },
+    { "æ",                   "<cmd>Telescope diagnostics<cr>",                               desc = "Code diagnostics" },
 
 
     ---------------------------------------
@@ -116,7 +117,7 @@ which_key.add({
     { "<leader>rn",          vim.lsp.buf.rename,                                             desc = "Rename symbol" },
     { "Ø",                   vim.lsp.buf.implementation,                                     desc = "Goto implementation" },
     { "ø",                   vim.lsp.buf.hover,                                              desc = "Show mouse-hover info" },
-    { "æ",                   vim.lsp.buf.code_action,                                        desc = "Perform code refactor actions" },
+    { "Æ",                   vim.lsp.buf.code_action,                                        desc = "Perform code refactor actions" },
     { "<leader>gf",          vim.lsp.buf.format,                                             desc = "Code format" },
 
     { "<F5>",                "<cmd>make<cr>",                                                desc = "Make" },
