@@ -1,5 +1,5 @@
 local default_options = {
-    --  timeoutlen = 250, -- time to wait for a mapped sequence to complete (in milliseconds)
+    -- timeoutlen = 250, -- time to wait for a mapped sequence to complete (in milliseconds)
     -- guifont = "monofur mono for Powerline:h6", -- the font used in graphical neovim applications
     -- hidden = true, -- required to keep multiple buffers and open multiple buffers
     -- shadafile =
@@ -15,12 +15,17 @@ local default_options = {
     cursorline     = true,    -- highlight the current line
     expandtab      = true,    -- convert tabs to spaces
     fileencoding   = "utf-8", -- the encoding written to a file
-    foldlevel      = 20,
+    exrc           = true,    -- Allow per-project .nvimrc file
+    secure         = true,    -- ^ be secure about it ^
+    foldlevel      = 99,
     foldmethod     = "marker",
+    foldcolumn     = "1",      -- Show fold indicators
+    fillchars      = { foldopen = "▽", foldclose = "▷", fold = " ", foldsep = "│" },
     gdefault       = true, -- Global search/replace by default
     hlsearch       = true, -- highlight all matches on previous search pattern
     ignorecase     = true, -- ignore case in search patterns
     list           = true,
+    virtualedit    = "all", -- allow us to move the cursor beyond EOL
     listchars      = {
         -- eol = "⤶",
         tab = "▹ ", -- tab must be two or three characters

@@ -30,6 +30,7 @@ vim.keymap.set("t", "<C-Space>", function() require("nvterm.terminal").toggle "v
 -- must be mapped this way to work smoothly
 vim.keymap.set("n", ",", ":")
 
+vim.keymap.set("n", "<space>a", "ggVG");
 
 -- Terminal escape keys
 vim.keymap.set("t", "<S-Esc>", '<C-\\><C-n>')                                                 -- exit out of terminal
@@ -46,14 +47,13 @@ which_key.add({
     { "<backspace>",         "<cmd>noh<cr>",                                                 desc = "Clear search highlight" },
     { "<leader>a",           "ggVG",                                                         desc = "Select all" },
 
-    { "½",                   "^",                                                            desc = "Go to start of line" },
+    { "<leader>p",           '"+p',                                                          desc = "Paste from OS clipboard" },
+    { "<leader>y",           '"+y',                                                          desc = "Yank to OS clipboard" },
+
     { "<leader>$",           "^",                                                            desc = "Go to start of line" },
-    { "<leader>½",           "$",                                                            desc = "Go to end of line" },
 
     { "<leader><backspace>", "<cmd>qa!<cr>",                                                 desc = "Close vim without saving!" },
     { "<leader>s",           "<cmd>update<cr>",                                              desc = "Save current buffer" },
-    { "<leader>f",           "<cmd>NvimTreeToggle<cr>",                                      desc = "Toggle file explorer" },
-
 
     { "<leader><space>",     desc = "Quitting / Exiting" },
     { "<leader><space>q",    "<cmd>wqa!<cr>",                                                desc = "Save all and exit" },
@@ -72,7 +72,7 @@ which_key.add({
     -----------------------------
     { "å",                   "<cmd>Telescope find_files<cr>",                                desc = "Find siles by name" },
     { "Å",                   "<cmd>Telescope grep_string<cr>",                               desc = "Find files by content" },
-    { "-",                   "<cmd>Telescope buffers<cr>",                                   desc = "Search open buffers" },
+    { "-",                   "<cmd>Telescope lsp_document_symbols<cr>",                      desc = "Search for symbols" },
 
 
     ---------------------------------------
@@ -111,10 +111,10 @@ which_key.add({
     { "<leader>gD",          vim.lsp.buf.declaration,                                        desc = "Goto declaration", },
     { "<leader>gd",          vim.lsp.buf.definition,                                         desc = "Goto definition" },
     { "<leader>gr",          vim.lsp.buf.references,                                         desc = "Find all references to the current symbol" },
-    { "<leader>gi",          vim.lsp.buf.implementation,                                     desc = "Goto implementation" },
+    { "<leader>gi",          vim.lsp.buf.signature_help,                                     desc = "Signature help" },
     { "<leader>gt",          vim.lsp.buf.type_definition,                                    desc = "Goto type definition" },
     { "<leader>rn",          vim.lsp.buf.rename,                                             desc = "Rename symbol" },
-    { "Ø",                   vim.lsp.buf.signature_help,                                     desc = "Show signature help" },
+    { "Ø",                   vim.lsp.buf.implementation,                                     desc = "Goto implementation" },
     { "ø",                   vim.lsp.buf.hover,                                              desc = "Show mouse-hover info" },
     { "æ",                   vim.lsp.buf.code_action,                                        desc = "Perform code refactor actions" },
     { "<leader>gf",          vim.lsp.buf.format,                                             desc = "Code format" },

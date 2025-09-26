@@ -1,6 +1,6 @@
 if vim.g.neovide then
     -- print("neovide detected")
-    -- vim.o.guifont = 'monofur mono for Powerline'
+    -- vim.o.guifont = 'CaskaydiaCove Nerd Font'
 
     vim.g.neovide_refresh_rate_idle = 2
     vim.g.neovide_refresh_rate = 60

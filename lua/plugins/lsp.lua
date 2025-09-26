@@ -27,15 +27,19 @@ return {
             -- LSP keymaps (will be set when LSP attaches to buffer)
             local on_attach = function(_, bufnr)
                 local opts = { buffer = bufnr, silent = true }
+
+                vim.opt_local.foldmethod = "expr"
+                vim.opt_local.foldexpr = "nvim_treesitter#foldexpr()"
                 vim.keymap.set("n", "<leader>gD", vim.lsp.buf.declaration, opts)
                 vim.keymap.set("n", "<leader>gd", vim.lsp.buf.definition, opts)
                 vim.keymap.set("n", "<leader>gr", vim.lsp.buf.references, opts)
                 vim.keymap.set("n", "<leader>gi", vim.lsp.buf.implementation, opts)
                 vim.keymap.set("n", "<leader>gt", vim.lsp.buf.type_definition, opts)
                 vim.keymap.set("n", "<leader>rn", vim.lsp.buf.rename, opts)
-                vim.keymap.set("n", "Ø", vim.lsp.buf.signature_help, opts)
+                vim.keymap.set("n", "Ø", vim.lsp.buf.implementation, opts)
                 vim.keymap.set("n", "ø", vim.lsp.buf.hover, opts)
                 vim.keymap.set("n", "æ", vim.lsp.buf.code_action, opts)
+                vim.keymap.set("v", "æ", vim.lsp.buf.code_action, opts)
                 vim.keymap.set("n", "<leader>gf", function()
                     vim.lsp.buf.format({ async = true })
                 end, opts)
@@ -51,11 +55,11 @@ return {
                             version = "LuaJIT",
                         },
                         diagnostics = {
-                            globals = { "vim" }, -- Recognize 'vim' global
+                            globals = { "vim", "hs" }, -- Recognize 'vim' global
                         },
                         workspace = {
                             library = vim.api.nvim_get_runtime_file("", true),
-                            checkThirdParty = false,
+                            checkThirdParty = true,
                         },
                         telemetry = {
                             enable = false,
@@ -94,8 +98,14 @@ return {
             lspconfig.eslint.setup({
                 capabilities = capabilities,
                 on_attach = on_attach,
-                bin = "eslint_d",
+                -- bin = "eslint_d",
+                cmd = { 'vscode-eslint-language-server', '--stdio' }
             })
+
+            lspconfig.html.setup({
+                capabilities = vim.lsp.protocol.make_client_capabilities(),
+                on_attach = on_attach,
+            });
         end,
     },
 
@@ -107,12 +117,12 @@ return {
         build = ":MasonUpdate",
         opts = {
             ensure_installed = {
-                "eslint_d",
                 "lua-language-server",
                 "gopls",
+                "html-lsp",
                 "typescript-language-server",
-                "stylua",   -- Lua formatter
-                "gofumpt",  -- Go formatter
+                "stylua",  -- Lua formatter
+                "gofumpt", -- Go formatter
                 "prettier",
                 "standardjs",
             },
@@ -182,11 +192,12 @@ return {
                 completion = {
                     completeopt = "menu,menuone,preview,noselect",
                 },
-                snippet = {
-                    expand = function(args)
-                        luasnip.lsnip_expand(args.body)
-                    end,
-                },
+                -- snippet = {
+                --     expand = function(args)
+                --     -- /Users/krh/.config/nvim/lua/plugins/lsp.lua:196: attempt to call field 'Isnip_expand' (a nil value)
+                --         luasnip.lsnip_expand(args.body)
+                --     end,
+                -- },
                 mapping = cmp.mapping.preset.insert({
                     ["<C-k>"] = cmp.mapping.select_prev_item(),
                     ["<C-j>"] = cmp.mapping.select_next_item(),
@@ -257,23 +268,23 @@ return {
         end,
     },
 
-    -- Auto pairs
-    {
-        "windwp/nvim-autopairs",
-        event = "InsertEnter",
-        config = function()
-            local autopairs = require("nvim-autopairs")
-            autopairs.setup({
-                check_ts = true, -- treesitter integration
-                disable_filetype = { "TelescopePrompt" },
-            })
-
-            -- Integration with cmp
-            local cmp_autopairs = require("nvim-autopairs.completion.cmp")
-            local cmp = require("cmp")
-            cmp.event:on("confirm_done", cmp_autopairs.on_confirm_done())
-        end,
-    },
+    -- -- Auto pairs
+    -- {
+    --     "windwp/nvim-autopairs",
+    --     event = "InsertEnter",
+    --     config = function()
+    --         local autopairs = require("nvim-autopairs")
+    --         autopairs.setup({
+    --             check_ts = true, -- treesitter integration
+    --             disable_filetype = { "TelescopePrompt" },
+    --         })
+    --
+    --         -- Integration with cmp
+    --         local cmp_autopairs = require("nvim-autopairs.completion.cmp")
+    --         local cmp = require("cmp")
+    --         cmp.event:on("confirm_done", cmp_autopairs.on_confirm_done())
+    --     end,
+    -- },
 
     -- Optional: Better LSP UI
     {
