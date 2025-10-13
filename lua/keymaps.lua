@@ -5,36 +5,15 @@ if not ok then
     return
 end
 
------------------------------
--- LEADER AND LOCAL LEADER
---
--- are set in init.lua
--- because they must be set
--- before LAZY
------------------------------
-
------------------------------
--- command line shortcut
------------------------------
--- must be mapped this way to work smoothly
-vim.keymap.set("n", ",", ":")
 
 
--- Terminal escape keys
-vim.keymap.set("t", "<S-Esc>", '<C-\\><C-n>')                                                 -- exit out of terminal
-vim.keymap.set("t", "<C-Space>", function() require("nvterm.terminal").toggle "vertical" end) -- toggle terminal
 
------------------------------
--- git keys
------------------------------
--- must be mapped this way to work smoothly
-vim.keymap.set("n", ",", ":")
+------------------------------------------------------
+-- Special keys (that witch-key cannot handle smoothly
+------------------------------------------------------
+vim.keymap.set("n", ",", ":") -- Shortcut to : (because danish keyboard)
 
-vim.keymap.set("n", "<space>a", "ggVG");
 
--- Terminal escape keys
-vim.keymap.set("t", "<S-Esc>", '<C-\\><C-n>')                                                 -- exit out of terminal
-vim.keymap.set("t", "<C-Space>", function() require("nvterm.terminal").toggle "vertical" end) -- toggle terminal
 
 -----------------------------
 -- Which-Key Keymappings
@@ -48,7 +27,7 @@ which_key.add({
     { "<leader>a",           "ggVG",                                                         desc = "Select all" },
 
     { "<leader>p",           '"+p',                                                          desc = "Paste from OS clipboard" },
-    { "<leader>y",           '"+y',                                                          desc = "Yank to OS clipboard" },
+    { "<leader>y",           '"+y',                                                          desc = "Yank to OS clipboard",                     mode = "v" },
 
     { "<leader>$",           "^",                                                            desc = "Go to start of line" },
 
@@ -68,11 +47,19 @@ which_key.add({
     { "<leader>o",           "<cmd>!open %<cr>",                                             desc = "Make the OS open the file" },
 
     -----------------------------
+    -- GIT
+    -----------------------------
+    { "<leader>ga",          function() require("tinygit").interactiveStaging() end,         desc = "git add" },
+    { "<leader>gc",          function() require("tinygit").smartCommit() end,                desc = "git commit" },
+    { "<leader>gp",          function() require("tinygit").push() end,                       desc = "git push" },
+
+    -----------------------------
     -- Telescope
     -----------------------------
     { "å",                   "<cmd>Telescope find_files<cr>",                                desc = "Find siles by name" },
     { "Å",                   "<cmd>Telescope grep_string<cr>",                               desc = "Find files by content" },
     { "-",                   "<cmd>Telescope lsp_document_symbols<cr>",                      desc = "Search for symbols" },
+    { "_",                   "<cmd>Telescope buffers<cr>",                                   desc = "Browse open files" },
     { "æ",                   "<cmd>Telescope diagnostics<cr>",                               desc = "Code diagnostics" },
 
 

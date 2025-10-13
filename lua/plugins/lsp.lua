@@ -123,8 +123,8 @@ return {
                 "typescript-language-server",
                 "stylua",  -- Lua formatter
                 "gofumpt", -- Go formatter
-                "prettier",
-                "standardjs",
+                -- "prettier",
+                -- "standardjs",
             },
         },
         config = function(_, opts)

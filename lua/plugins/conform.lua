@@ -9,8 +9,8 @@ return {
     config = function()
         require("conform").setup({
             formatters_by_ft = {
-                javascript = { "prettier" },
-                typescript = { "prettier" },
+                javascript = { "prettier", "js_beautify", stop_after_first = true },
+                typescript = { "prettier", "js_beautify", stop_after_first = true },
                 json = { "prettier" },
                 html = { "qc", "prettier", stop_after_first = true },
                 css = { "prettier" },
