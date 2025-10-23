@@ -39,7 +39,6 @@ which_key.add({
     { "<leader><space>z",    desc = "Are you sure you want to quit without saving? " },
     { "<leader><space>zz",   "<cmd>qa!<cr>",                                                 desc = "Exit without saving" },
 
-    { "<leader>c",           "<cmd>close<cr>",                                               desc = "Close window" },
     { "<leader>q",           "<cmd>bd<cr>",                                                  desc = "Close buffer" },
     { "<leader>Q",           "<cmd>bd!<cr>",                                                 desc = "Close buffer without saving" },
 
@@ -90,19 +89,7 @@ which_key.add({
 
 
     ---------------------------------------
-    -- LSP Code Completion / navigation
+    -- CODE
     ---------------------------------------
-    { "<leader>g",           desc = "Code navigation" },
-    { "<leader>gD",          vim.lsp.buf.declaration,                                        desc = "Goto declaration", },
-    { "<leader>gd",          vim.lsp.buf.definition,                                         desc = "Goto definition" },
-    { "<leader>gr",          vim.lsp.buf.references,                                         desc = "Find all references to the current symbol" },
-    { "<leader>gi",          vim.lsp.buf.signature_help,                                     desc = "Signature help" },
-    { "<leader>gt",          vim.lsp.buf.type_definition,                                    desc = "Goto type definition" },
-    { "<leader>rn",          vim.lsp.buf.rename,                                             desc = "Rename symbol" },
-    { "Ø",                   vim.lsp.buf.implementation,                                     desc = "Goto implementation" },
-    { "ø",                   vim.lsp.buf.hover,                                              desc = "Show mouse-hover info" },
-    { "Æ",                   vim.lsp.buf.code_action,                                        desc = "Perform code refactor actions" },
-    { "<leader>gf",          vim.lsp.buf.format,                                             desc = "Code format" },
-
     { "<F5>",                "<cmd>make<cr>",                                                desc = "Make" },
 })

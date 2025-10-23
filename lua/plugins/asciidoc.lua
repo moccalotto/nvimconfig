@@ -1,5 +1,9 @@
 return {
-    'tigion/nvim-asciidoc-preview',
-    ft = { 'asciidocor' },
-    -- opts = {},
+    {
+        "habamax/vim-asciidoctor",
+    },
+    {
+        'tigion/nvim-asciidoc-preview',
+        ft = { 'asciidocor' },
+    }
 }
