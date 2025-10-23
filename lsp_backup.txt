@@ -193,138 +193,138 @@ return {
                     completeopt = "menu,menuone,preview,noselect",
                 },
                 -- snippet = {
-                --     expand = function(args)
-                --     -- /Users/krh/.config/nvim/lua/plugins/lsp.lua:196: attempt to call field 'Isnip_expand' (a nil value)
-                --         luasnip.lsnip_expand(args.body)
-                --     end,
-                -- },
-                mapping = cmp.mapping.preset.insert({
-                    ["<C-k>"] = cmp.mapping.select_prev_item(),
-                    ["<C-j>"] = cmp.mapping.select_next_item(),
-                    ["<C-b>"] = cmp.mapping.scroll_docs(-4),
-                    ["<C-f>"] = cmp.mapping.scroll_docs(4),
-                    ["<C-Space>"] = cmp.mapping.complete(),
-                    ["<C-e>"] = cmp.mapping.abort(),
-                    ["<CR>"] = cmp.mapping.confirm({ select = false }),
-                }),
-                sources = cmp.config.sources({
-                    { name = "nvim_lsp" },
-                    { name = "luasnip" },
-                    { name = "buffer" },
-                    { name = "path" },
-                }),
-            })
-        end,
-    },
-
-    -- Treesitter for better syntax highlighting
-    {
-        "nvim-treesitter/nvim-treesitter",
-        event = { "BufReadPre", "BufNewFile" },
-        build = ":TSUpdate",
-        dependencies = {
-            "windwp/nvim-autopairs",
-        },
-        config = function()
-            local treesitter = require("nvim-treesitter.configs")
-
-            treesitter.setup({
-                sync_install = false,
-                auto_install = true,
-                ignore_install = {},
-                modules = {},
-                highlight = {
-                    enable = true,
-                },
-                indent = { enable = true },
-                autopairs = {
-                    enable = true,
-                },
-                ensure_installed = {
-                    "lua",
-                    "vim",
-                    "vimdoc",
-                    "go",
-                    "javascript",
-                    "typescript",
-                    "json",
-                    "yaml",
-                    "html",
-                    "css",
-                    "markdown",
-                    "markdown_inline",
-                    "bash",
-                },
-                incremental_selection = {
-                    enable = true,
-                    keymaps = {
-                        init_selection = "<C-space>",
-                        node_incremental = "<C-space>",
-                        scope_incremental = false,
-                        node_decremental = "<bs>",
-                    },
-                },
-            })
-        end,
-    },
-
-    -- -- Auto pairs
-    -- {
-    --     "windwp/nvim-autopairs",
-    --     event = "InsertEnter",
-    --     config = function()
-    --         local autopairs = require("nvim-autopairs")
-    --         autopairs.setup({
-    --             check_ts = true, -- treesitter integration
-    --             disable_filetype = { "TelescopePrompt" },
-    --         })
-    --
-    --         -- Integration with cmp
-    --         local cmp_autopairs = require("nvim-autopairs.completion.cmp")
-    --         local cmp = require("cmp")
-    --         cmp.event:on("confirm_done", cmp_autopairs.on_confirm_done())
-    --     end,
-    -- },
-
-    -- Optional: Better LSP UI
-    {
-        "glepnir/lspsaga.nvim",
-        event = "LspAttach",
-        config = function()
-            require("lspsaga").setup({
-                ui = {
-                    code_action = "",
-                    winblend = 10,
-                    border = "rounded",
-                    colors = {
-                        normal_bg = "#002b36",
-                    },
-                },
-            })
-        end,
-        dependencies = {
-            "nvim-treesitter/nvim-treesitter",
-            "nvim-tree/nvim-web-devicons",
-        },
-    },
-
-    -- Plugin especially for editing neovim's lua files
-    {
-        "folke/lazydev.nvim",
-        ft = "lua", -- only load on lua files
-        opts = {
-            library = {
-                -- See the configuration section for more details
-                -- Load luvit types when the `vim.uv` word is found
-                { path = "${3rd}/luv/library", words = { "vim%.uv" } },
+                    --     expand = function(args)
+                        --     -- /Users/krh/.config/nvim/lua/plugins/lsp.lua:196: attempt to call field 'Isnip_expand' (a nil value)
+                        --         luasnip.lsnip_expand(args.body)
+                        --     end,
+                        -- },
+                        mapping = cmp.mapping.preset.insert({
+                            ["<C-k>"] = cmp.mapping.select_prev_item(),
+                            ["<C-j>"] = cmp.mapping.select_next_item(),
+                            ["<C-b>"] = cmp.mapping.scroll_docs(-4),
+                            ["<C-f>"] = cmp.mapping.scroll_docs(4),
+                            ["<C-Space>"] = cmp.mapping.complete(),
+                            ["<C-e>"] = cmp.mapping.abort(),
+                            ["<CR>"] = cmp.mapping.confirm({ select = false }),
+                        }),
+                        sources = cmp.config.sources({
+                            { name = "nvim_lsp" },
+                            { name = "luasnip" },
+                            { name = "buffer" },
+                            { name = "path" },
+                        }),
+                    })
+                end,
             },
-        },
-    },
-    {
-        "ray-x/lsp_signature.nvim",
-        event = "InsertEnter",
-        opts = {
-            -- cfg options
-        },
-    }
-}
+
+            -- Treesitter for better syntax highlighting
+            {
+                "nvim-treesitter/nvim-treesitter",
+                event = { "BufReadPre", "BufNewFile" },
+                build = ":TSUpdate",
+                dependencies = {
+                    "windwp/nvim-autopairs",
+                },
+                config = function()
+                    local treesitter = require("nvim-treesitter.configs")
+
+                    treesitter.setup({
+                        sync_install = false,
+                        auto_install = true,
+                        ignore_install = {},
+                        modules = {},
+                        highlight = {
+                            enable = true,
+                        },
+                        indent = { enable = true },
+                        autopairs = {
+                            enable = true,
+                        },
+                        ensure_installed = {
+                            "lua",
+                            "vim",
+                            "vimdoc",
+                            "go",
+                            "javascript",
+                            "typescript",
+                            "json",
+                            "yaml",
+                            "html",
+                            "css",
+                            "markdown",
+                            "markdown_inline",
+                            "bash",
+                        },
+                        incremental_selection = {
+                            enable = true,
+                            keymaps = {
+                                init_selection = "<C-space>",
+                                node_incremental = "<C-space>",
+                                scope_incremental = false,
+                                node_decremental = "<bs>",
+                            },
+                        },
+                    })
+                end,
+            },
+
+            -- -- Auto pairs
+            -- {
+                --     "windwp/nvim-autopairs",
+                --     event = "InsertEnter",
+                --     config = function()
+                    --         local autopairs = require("nvim-autopairs")
+                    --         autopairs.setup({
+                        --             check_ts = true, -- treesitter integration
+                        --             disable_filetype = { "TelescopePrompt" },
+                        --         })
+                        --
+                        --         -- Integration with cmp
+                        --         local cmp_autopairs = require("nvim-autopairs.completion.cmp")
+                        --         local cmp = require("cmp")
+                        --         cmp.event:on("confirm_done", cmp_autopairs.on_confirm_done())
+                        --     end,
+                        -- },
+
+                        -- Optional: Better LSP UI
+                        {
+                            "glepnir/lspsaga.nvim",
+                            event = "LspAttach",
+                            config = function()
+                                require("lspsaga").setup({
+                                    ui = {
+                                        code_action = "",
+                                        winblend = 10,
+                                        border = "rounded",
+                                        colors = {
+                                            normal_bg = "#002b36",
+                                        },
+                                    },
+                                })
+                            end,
+                            dependencies = {
+                                "nvim-treesitter/nvim-treesitter",
+                                "nvim-tree/nvim-web-devicons",
+                            },
+                        },
+
+                        -- Plugin especially for editing neovim's lua files
+                        {
+                            "folke/lazydev.nvim",
+                            ft = "lua", -- only load on lua files
+                            opts = {
+                                library = {
+                                    -- See the configuration section for more details
+                                    -- Load luvit types when the `vim.uv` word is found
+                                    { path = "${3rd}/luv/library", words = { "vim%.uv" } },
+                                },
+                            },
+                        },
+                        {
+                            "ray-x/lsp_signature.nvim",
+                            event = "InsertEnter",
+                            opts = {
+                                -- cfg options
+                            },
+                        }
+                    }

@@ -17,7 +17,6 @@ return {
 
     config = function()
         local cmp = require("cmp")
-        print "loading cmp"
         cmp.setup({
             snippet = {
                 -- REQUIRED - you must specify a snippet engine
