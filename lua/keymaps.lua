@@ -49,9 +49,7 @@ which_key.add({
     -----------------------------
     -- GIT
     -----------------------------
-    { "<leader>ga",          function() require("tinygit").interactiveStaging() end,         desc = "git add" },
-    { "<leader>gc",          function() require("tinygit").smartCommit() end,                desc = "git commit" },
-    { "<leader>gp",          function() require("tinygit").push() end,                       desc = "git push" },
+    --- NO COMMANDS YET
 
     -----------------------------
     -- Telescope
