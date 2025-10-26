@@ -1,13 +1,7 @@
-vim.lsp.enable({
-	"lua_ls",
-})
-
-vim.diagnostic.config({
-	-- virtual_lines = true,
+vim.lsp.config("*", {
 	virtual_text = { current_line = true },
 	virtual_lines = true,
 	underline = true,
-	update_in_insert = false,
 	severity_sort = true,
 	float = {
 		border = "rounded",
@@ -26,3 +20,5 @@ vim.diagnostic.config({
 		},
 	},
 })
+
+vim.lsp.enable({ "emmylua_ls" })

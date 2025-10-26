@@ -3,7 +3,6 @@
 -- and plugins installable via Mason.
 --
 --We could also have used null_ls, but it has a weird name ;-P
---
 return {
 	"stevearc/conform.nvim",
 	config = function()
