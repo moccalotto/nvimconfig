@@ -3,7 +3,7 @@ vim.opt.background = "dark"
 vim.opt.cmdheight = 1 -- The height of the command line
 vim.opt.colorcolumn = "99999" -- fixes indentline for now
 vim.opt.winborder = "rounded"
-vim.opt.completeopt = { "menuone", "noselect" }
+vim.opt.completeopt = { "menuone", "noselect", "popup" }
 vim.opt.conceallevel = 0 -- so that `` is visible in markdown files
 vim.opt.cursorline = true -- highlight the current line
 vim.opt.expandtab = true -- convert tabs to spaces
@@ -19,9 +19,9 @@ vim.opt.hlsearch = true -- highlight all matches on previous search pattern
 vim.opt.ignorecase = true -- ignore case in search patterns
 vim.opt.list = true
 vim.opt.virtualedit = "all" -- allow us to move the cursor beyond EOL
-vim.opt.mouse = "a" -- allow the mouse to be used in neovim
+vim.opt.mouse = "a" -- allow the mouse to be used in terminal+neovim
 vim.opt.number = true -- set numbered lines
-vim.opt.numberwidth = 3 -- width of number column
+vim.opt.numberwidth = 4 -- width of number column
 vim.opt.pumblend = 5 -- transparency in PopUpMenu
 vim.opt.pumheight = 10 -- pop up menu height
 vim.opt.relativenumber = true -- set relative numbered lines
@@ -67,12 +67,6 @@ if vim.api.nvim_list_uis() == 0 then
 	return
 end
 
--- Colorscheme
--- Will be overwritten later by the "melange" color scheme
--- this option is here in case Lazy doesn't load Melange
--- for some reason.
-vim.cmd([[colorscheme __apprentice]])
-
 -- Undercurl
 vim.cmd([[let &t_Cs = "\e[4:3m"]])
 vim.cmd([[let &t_Ce = "\e[4:0m"]])
@@ -80,3 +74,5 @@ vim.cmd([[let &t_Ce = "\e[4:0m"]])
 -- Remapping the leader key must be done BEFORE lazy is loaded
 vim.g.mapleader = " " -- space
 vim.g.maplocalleader = ","
+
+local orig_util_open_floating_preview = vim.lsp.util.open_floating_preview

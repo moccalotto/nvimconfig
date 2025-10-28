@@ -11,11 +11,11 @@ return {
 				javascript = { "prettier", "js_beautify", stop_after_first = true },
 				typescript = { "prettier", "js_beautify", stop_after_first = true },
 				json = { "prettier" },
-				html = { "qc", "prettier", stop_after_first = true },
+				html = { "prettier" },
 				css = { "prettier" },
 				scss = { "prettier" },
 				markdown = { "prettier" },
-				lua = { "stylua" },
+				-- lua = { "stylua" },
 				go = { "goimports", "golines", "gofmt" },
 			},
 			format_on_save = {

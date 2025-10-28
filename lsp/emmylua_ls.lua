@@ -11,16 +11,17 @@ return {
 	},
 	workspace_required = false,
 	workspace = {
-		library = {
-			"$VIMRUNTIME", -- for vim.*
-			"$LLS_Addons/luvit", -- for vim.uv.*
-			-- (should not be needed in future from what I hear.
-			-- I just set $LLS_Addons in my .zshrc to the dir where I
-			-- recursively cloned https://github.com/LuaLS/LLS-Addons)
-			"$HOME/.local/share/nvim/lazy", -- plugins dir, change to something else if
-			-- you don't use lazy.nvim
-			vim.api.nvim_get_runtime_file("", true),
-		},
+		-- library = {
+		-- 	vim.api.nvim_get_runtime_file("", true),
+		-- 	"$VIMRUNTIME", -- for vim.*
+		-- 	"$LLS_Addons/luvit", -- for vim.uv.*
+		-- 	-- (should not be needed in future from what I hear.
+		-- 	-- I just set $LLS_Addons in my .zshrc to the dir where I
+		-- 	-- recursively cloned https://github.com/LuaLS/LLS-Addons)
+		-- 	"$HOME/.local/share/nvim/lazy", -- plugins dir, change to something else if
+		-- 	-- you don't use lazy.nvim
+		-- },
+		library = vim.api.nvim_get_runtime_file("", true),
 		ignoreGlobs = { "**/*_spec.lua" }, -- to avoid some weird type defs in a plugin
 	},
 }

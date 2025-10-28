@@ -6,13 +6,16 @@ if not ok then
 end
 
 
-
 ------------------------------------------------------
 -- Special keys (that witch-key cannot handle smoothly
 ------------------------------------------------------
 vim.keymap.set("n", ",", ":") -- Shortcut to : (because danish keyboard)
 
-
+--
+-- Disable horizontal scrolling
+--
+vim.keymap.set("n", "<ScrollWheelRight>", "<nop>")
+vim.keymap.set("n", "<ScrollWheelLeft>", "<nop>")
 
 -----------------------------
 -- Which-Key Keymappings
