@@ -7,6 +7,7 @@ vim.lsp.config("*", {
         border = "rounded",
         source = true,
     },
+    update_in_insert = false,
     signs = {
         text = {
             [vim.diagnostic.severity.ERROR] = "󰅚 ",
@@ -23,10 +24,10 @@ vim.lsp.config("*", {
 
 
 local orig_util_open_floating_preview = vim.lsp.util.open_floating_preview
-function vim.lsp.util.open_floating_preview(contents, syntax, opts, ...)
+---@diagnostic disable-next-line
+vim.lsp.util.open_floating_preview = function(contents, syntax, opts, ...)
     opts = opts or {}
     opts.border = opts.border or 'rounded'
-    print("nugga")
 
     return orig_util_open_floating_preview(contents, syntax, opts, ...)
 end
@@ -50,32 +51,34 @@ vim.api.nvim_create_autocmd("LspAttach", {
 
         map("<leader>c", "<nop>", "LSP Commands")
         map("<leader>ch", vim.lsp.buf.signature_help, "Signature Documentation")
-        map("<leader>cr", vim.lsp.buf.rename, "Rename all references")
+        map("<leader>cn", vim.lsp.buf.rename, "Rename Identifier")
         map("<leader>cf", vim.lsp.buf.format, "Format")
-        map("<leader>cd", "<cmd>vsplit | lua vim.lsp.buf.definition()<cr>", "Goto Definition in Vertical Split")
+        map("<leader>cr", vim.lsp.buf.references, "List references")
+        map("<leader>cd", "<cmd>vsplit | lua vim.lsp.buf.definition()<cr>", "Open definition in Vertical Split")
 
-        --- @param client vim.lsp.Client
-        local function client_supports_method(client, method, bufnr)
-            if not client then
-                return
-            end
+        local client = vim.lsp.get_client_by_id(event.data.client_id)
+        if client == nil then
+            return
+        end
+
+        local function client_supports_method(method, bufnr)
             if vim.fn.has("nvim-0.11") == 1 then
                 return client:supports_method(method, bufnr)
             else
+                ---@diagnostic disable-next-line
                 return client.supports_method(method, { bufnr = bufnr })
             end
         end
 
-        local client = vim.lsp.get_client_by_id(event.data.client_id)
 
         vim.lsp.completion.enable(true, client.id, event.buf, {
             autotrigger = true,
-            -- convert = function(item)
-            --     return { abbr = item.label:gsub('%b()', '') }
-            -- end,
+            convert = function(item)
+                return { abbr = item.label:gsub('%b()', '') }
+            end,
         })
 
-        if client_supports_method(client, vim.lsp.protocol.Methods.textDocument_documentHighlight, event.buf) then
+        if client_supports_method(vim.lsp.protocol.Methods.textDocument_documentHighlight, event.buf) then
             local autogroup = vim.api.nvim_create_augroup("lsp-autogroup", { clear = false })
 
             -- When cursor stops moving: Highlights all instances of the symbol under the cursor

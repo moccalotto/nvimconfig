@@ -45,38 +45,39 @@ vim.opt.writebackup = false   -- if a file is being edited by another program (o
 vim.opt.spell = true
 vim.opt.listchars = { tab = "▹ ", trail = "·", nbsp = "⍽" }
 
--- timeoutlen = 250, -- time to wait for a mapped sequence to complete (in milliseconds)
--- guifont = "monofur mono for Powerline:h6", -- the font used in graphical neovim applications
--- hidden = true, -- required to keep multiple buffers and open multiple buffers
--- shadafile =
--- showmode = false, -- we don't need to see things like -- INSERT -- anymore
--- signcolumn = "yes:1", -- always show the sign column, otherwise it would shift the text each time
--- titlestring = "%<%F%=%l/%L - nvim", -- what the title of the window will be set to
--- ruler          = false, -- disable numbers that show line and column in lower right corner
-
----  SETTINGS  ---
--- opt.shortmess:append "c" -- don't show redundant messages from ins-completion-menu
--- opt.shortmess:append "I" -- don't show the default intro message
 vim.opt.whichwrap:append("<,>,[,],h,l")
-if vim.api.nvim_list_uis() == 0 then
-    vim.opt.shortmess = ""   -- try to prevent echo from cutting messages off or prompting
-    vim.opt.more = false     -- don't pause listing when screen is filled
-    vim.opt.cmdheight = 9999 -- helps avoiding |hit-enter| prompts.
-    vim.opt.columns = 9999   -- set the widest screen possible
-    vim.opt.swapfile = false -- don't use a swap file
-    return
-end
 
+----------------------
 -- Undercurl
+----------------------
 vim.cmd([[let &t_Cs = "\e[4:3m"]])
 vim.cmd([[let &t_Ce = "\e[4:0m"]])
 
+----------------------
+-- Leader keys
+----------------------
 -- Remapping the leader key must be done BEFORE lazy is loaded
+-- which also means it must be loaded before our keymaps file
 vim.g.mapleader = " "
 vim.g.maplocalleader = ","
 
---
--- Detect space character "homoglyphs"
---
+----------------
+-- Evil Spaces
+----------------
 vim.api.nvim_set_hl(0, "SneakySpace", { bg = "red" })      -- Define highlight group
 vim.fn.matchadd("SneakySpace", [[\u00A0\|\u200B\|\u202F]]) -- Highlight Sneaky Space (homoglyph space)
+
+
+----------------
+-- NEOVIDE
+----------------
+if vim.g.neovide then
+    vim.g.neovide_refresh_rate_idle = 2
+    vim.g.neovide_refresh_rate = 60
+    vim.g.neovide_hide_mouse_when_typing = true
+
+
+    -- print("neovide detected")
+    -- vim.o.guifont = 'CaskaydiaCove Nerd Font'
+    -- vim.g.neovide_theme = 'auto' -- this seems to make neovide have a light theme instead of a dark one.
+end
