@@ -9,7 +9,7 @@ return {
     config = function()
         require("nvim-treesitter.configs").setup({
             sync_install = false,
-            ignore_install = { "javascript" },
+            -- ignore_install = { "javascript" },
             modules = {},
             highlight = {
                 enable = true,
@@ -17,20 +17,22 @@ return {
             },
             indent = { enable = true },
             auto_install = true,
-            ensure_installed = { "bash", "c", "html",
-                "javascript",
-                "html",
-                "scss",
-                "css",
-                "make",
+            ensure_installed = {
+                "bash",
+                "c",
                 "cmake",
+                "css",
+                "go",
+                "html",
+                "javascript",
                 "json",
                 "lua",
+                "make",
                 "regex",
+                "scss",
                 "vim",
                 "vimdoc",
                 "yaml",
-                "go",
             },
         })
     end,

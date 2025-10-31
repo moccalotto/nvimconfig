@@ -55,12 +55,13 @@ keymap("n", "æ", "<cmd>Telescope diagnostics<cr>", { desc = "Code diagnostics" 
 -----------------------------
 -- Misc
 -----------------------------
-keymap("n", "gr", "<nop>", { desc = "LSP Functions" })                -- "Hack" to tell which-key that we're entering LSP territory
-keymap("n", "<backspace>", "<cmd>noh<cr>", { desc = "Clear search" }) --
+keymap("n", "gr", "<nop>", { desc = "LSP Functions" })
+keymap("n", "<backspace>", "<cmd>noh<cr>", { desc = "Clear search" })
 keymap("n", "<leader>a", "ggVG", { desc = "Select all" })
 keymap("n", "<leader>$", "^", { desc = "Go to start of line" })
 keymap("n", "<leader>s", "<cmd>update<cr>", { desc = "Save current buffer" })
 keymap("n", "<leader>o", "<cmd>!open %<cr>", { desc = "Make OS open this file" })
+
 
 ---------------------------------------
 -- Window / Tab / Buffer navigation

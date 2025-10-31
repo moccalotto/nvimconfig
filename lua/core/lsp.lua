@@ -74,6 +74,10 @@ vim.api.nvim_create_autocmd("LspAttach", {
         vim.lsp.completion.enable(true, client.id, event.buf, {
             autotrigger = true,
             convert = function(item)
+                -- %b() matches a set of matching parenthesis.
+                -- By replacing &b() with the empty string,
+                -- we effectively remove the parameters of any function
+                -- calls in the completion list.
                 return { abbr = item.label:gsub('%b()', '') }
             end,
         })
