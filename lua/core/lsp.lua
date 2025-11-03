@@ -22,6 +22,17 @@ vim.lsp.config("*", {
     },
 })
 
+-----------------------------
+-- Autocomplete + <tab>
+-----------------------------
+vim.keymap.set("i", "<Tab>", function()
+    return vim.fn.pumvisible() == 1 and "<C-n>" or "<Tab>"
+end, { expr = true, noremap = true })
+
+vim.keymap.set("i", "<S-Tab>", function()
+    return vim.fn.pumvisible() == 1 and "<C-p>" or "<S-Tab>"
+end, { expr = true, noremap = true })
+
 
 local orig_util_open_floating_preview = vim.lsp.util.open_floating_preview
 ---@diagnostic disable-next-line
@@ -44,7 +55,6 @@ vim.api.nvim_create_autocmd("LspAttach", {
         -- defaults:
         -- https://neovim.io/doc/user/news-0.11.html#_defaults
 
-        map("æ", vim.diagnostic.open_float, "Open Diagnostic Float")
         map("ø", vim.lsp.buf.hover, "Hover Documentation")
         map("Ø", vim.lsp.buf.declaration, "Goto Declaration")
         map("Æ", vim.lsp.buf.code_action, "Code Action")
@@ -54,6 +64,7 @@ vim.api.nvim_create_autocmd("LspAttach", {
         map("<leader>cn", vim.lsp.buf.rename, "Rename Identifier")
         map("<leader>cf", vim.lsp.buf.format, "Format")
         map("<leader>cr", vim.lsp.buf.references, "List references")
+        map("<leader>co", vim.diagnostic.open_float, "Open Diagnostic Float")
         map("<leader>cd", "<cmd>vsplit | lua vim.lsp.buf.definition()<cr>", "Open definition in Vertical Split")
 
         local client = vim.lsp.get_client_by_id(event.data.client_id)

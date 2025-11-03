@@ -1,3 +1,15 @@
+----------------
+-- Evil Spaces
+----------------
+-- test:          ⠀👨🏻‍🚀
+local evil_spaces = [=[\v[\u00A0\u2000-\u200B\u2060\u2800\u3000]]=]
+vim.api.nvim_set_hl(0, 'EvilWhiteSpace', { link = "ErrorMsg" }) -- Use the styling defined by ErrorMsg
+vim.fn.matchadd('EvilWhiteSpace', evil_spaces)
+
+
+------------------
+-- Highlight Yank
+------------------
 vim.api.nvim_create_autocmd("TextYankPost", {
     desc = "Highlight when yanking (copying) text",
     group = vim.api.nvim_create_augroup("kickstart-highlight-yank", { clear = true }),
@@ -6,14 +18,66 @@ vim.api.nvim_create_autocmd("TextYankPost", {
     end,
 })
 
+
+----------------------
+-- Trim Trailing Space
+----------------------
 vim.api.nvim_create_user_command("Trim", function()
     vim.cmd([[%s/\s\+$//e]])
     vim.cmd([[noh]])
 end, {})
 
 
+---------------------------------------
+-- Rename File (remain in current dir)
+---------------------------------------
+vim.api.nvim_create_user_command(
+    "RenameFile",
+    function(opts)
+        local old = vim.api.nvim_buf_get_name(0)
+        if vim.bo.modified then
+            vim.notify("Save or discard changes before renaming.", vim.log.levels.ERROR)
+            return
+        end
+
+        if old == "" then
+            vim.notify("No file name associated with buffer.", vim.log.levels.ERROR)
+            return
+        end
+
+        local dir = vim.fn.fnamemodify(old, ":h")
+        local new = dir .. "/" .. opts.args
+
+        if vim.uv.fs_stat(new) then
+            vim.notify("File already exists: " .. new, vim.log.levels.ERROR)
+            return
+        end
+
+        local ok, err = os.rename(old, new)
+        if not ok then
+            vim.notify("Rename failed: " .. (err or "unknown error"), vim.log.levels.ERROR)
+            return
+        end
+
+        vim.cmd("edit " .. vim.fn.fnameescape(new))
+        vim.cmd("bdelete! #")
+        vim.notify("Renamed:\n" .. old .. "\n→ " .. new)
+    end,
+    {
+        nargs = 1,
+        complete = "file",
+        desc = "Rename current file within its current directory"
+    }
+)
+
+
 -----------------------------------------------------------------------
--- TERMINAL
+--  _____                   _             _   ____  _             _
+-- |_   _|__ _ __ _ __ ___ (_)_ __   __ _| | |  _ \| |_   _  __ _(_)_ __
+--   | |/ _ \ '__| '_ ` _ \| | '_ \ / _` | | | |_) | | | | |/ _` | | '_ \
+--   | |  __/ |  | | | | | | | | | | (_| | | |  __/| | |_| | (_| | | | | |
+--   |_|\___|_|  |_| |_| |_|_|_| |_|\__,_|_| |_|   |_|\__,_|\__, |_|_| |_|
+--                                                          |___/
 -----------------------------------------------------------------------
 local term = {}
 vim.api.nvim_create_user_command("TermFloat", function() term.float() end, {})
@@ -21,6 +85,9 @@ vim.api.nvim_create_user_command("TermVSplit", function() term.vsplit() end, {})
 vim.api.nvim_create_user_command("TermHSplit", function() term.hsplit() end, {})
 
 
+--------------------------------
+-- Open term in floating window
+--------------------------------
 function term.float(opts)
     --
     -- Interpret options

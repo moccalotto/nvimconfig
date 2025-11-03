@@ -1,5 +1,4 @@
 local keymap = vim.keymap.set
-
 ------------------------------------------------------
 -- Special keys (that witch-key cannot handle smoothly
 ------------------------------------------------------
