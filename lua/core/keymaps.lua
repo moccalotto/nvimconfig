@@ -31,7 +31,6 @@ keymap("n", "<leader>yy", '"+yy', { desc = "Yank line to OS Clipboard" })
 keymap("n", "<leader>p", '"+p', { desc = "Paste OS Clipboard below" })
 keymap("n", "<leader>P", '"+P', { desc = "Paste OS Clipboard above" })
 
-
 ---------------------------------------
 -- CLOSE / QUIT / EXIT
 ---------------------------------------

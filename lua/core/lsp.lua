@@ -49,14 +49,14 @@ vim.api.nvim_create_autocmd("LspAttach", {
         vim.bo[event.buf].omnifunc = "v:lua.vim.lsp.omnifunc"
 
         local map = function(keys, func, desc)
-            vim.keymap.set("n", keys, func, { buffer = event.buf, desc = "LSP: " .. desc })
+            vim.keymap.set({ "n", "v" }, keys, func, { buffer = event.buf, desc = "LSP: " .. desc })
         end
 
         -- defaults:
         -- https://neovim.io/doc/user/news-0.11.html#_defaults
 
         map("ø", vim.lsp.buf.hover, "Hover Documentation")
-        map("Ø", vim.lsp.buf.declaration, "Goto Declaration")
+        map("Ø", vim.lsp.buf.definition, "Goto Declaration")
         map("Æ", vim.lsp.buf.code_action, "Code Action")
 
         map("<leader>c", "<nop>", "LSP Commands")
