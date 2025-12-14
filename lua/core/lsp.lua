@@ -1,5 +1,7 @@
 vim.lsp.config("*", {
-    virtual_text = { current_line = true },
+    virtual_text = {
+        current_line = true
+    },
     virtual_lines = true,
     underline = true,
     severity_sort = true,
@@ -51,9 +53,6 @@ vim.api.nvim_create_autocmd("LspAttach", {
         local map = function(keys, func, desc)
             vim.keymap.set({ "n", "v" }, keys, func, { buffer = event.buf, desc = "LSP: " .. desc })
         end
-
-        -- defaults:
-        -- https://neovim.io/doc/user/news-0.11.html#_defaults
 
         map("ø", vim.lsp.buf.hover, "Hover Documentation")
         map("Ø", vim.lsp.buf.definition, "Goto Declaration")

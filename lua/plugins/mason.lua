@@ -12,6 +12,7 @@ return {
             "lua_ls", --
             "ts_ls",
             "stylua",
+            "marksman",
         },
     },
     dependencies = {

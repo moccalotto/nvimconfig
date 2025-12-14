@@ -1,7 +1,7 @@
 -- Symbols
 vim.cmd([[
     iab _dagger †
-    iab _ddager ‡
+    iab _ddagger ‡
     iab _double_dagger ‡
 ]])
 

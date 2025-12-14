@@ -16,7 +16,6 @@ if not vim.loop.fs_stat(lazypath) then
     end
 end
 
--- rtp = runtimepath
 vim.opt.rtp:prepend(lazypath)
 
 -- Boot up the Lazy plugin

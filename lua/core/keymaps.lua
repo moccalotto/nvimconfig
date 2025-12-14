@@ -53,24 +53,27 @@ keymap("n", "æ", "<cmd>Telescope diagnostics<cr>", { desc = "Code diagnostics" 
 -----------------------------
 -- Misc
 -----------------------------
-keymap("n", "gr", "<nop>", { desc = "LSP Functions" })
 keymap("n", "<backspace>", "<cmd>noh<cr>", { desc = "Clear search" })
 keymap("n", "<leader>a", "ggVG", { desc = "Select all" })
 keymap("n", "<leader>$", "^", { desc = "Go to start of line" })
 keymap("n", "<leader>s", "<cmd>update<cr>", { desc = "Save current buffer" })
 keymap("n", "<leader>o", "<cmd>!open %<cr>", { desc = "Make OS open this file" })
+keymap("n", "<F5>", "<cmd>make<cr>", { desc = "Make" })
 
 
 ---------------------------------------
 -- Window / Tab / Buffer navigation
 ---------------------------------------
+keymap("n", "<leader>v", "<cmd>vs<cr>", { desc = "Vertical split" })
+--
 keymap("n", "gt", "<cmd>BufferLineCycleNext<cr>", { desc = "Next tab/buffer" })
 keymap("n", "gT", "<cmd>BufferLineCyclePrev<cr>", { desc = "Previous tab/buffer" })
+--
 keymap("n", "<leader>j", "<c-w><down>", { desc = "Move focus to window below" })
 keymap("n", "<leader>k", "<c-w><up>", { desc = "Move focus to window above" })
 keymap("n", "<leader>l", "<c-w><right>", { desc = "Move focus to window to the right" })
 keymap("n", "<leader>h", "<c-w><left>", { desc = "Move focus to window to the left" })
-
+--
 keymap("n", "<leader>b", "<nop>", { desc = "Buffer Selection Stuff" })
 keymap("n", "<leader>bb", "<cmd>BufferLinePick<cr>", { desc = "Pick an open buffer" })
 keymap("n", "<leader>bp", "<cmd>BufferLineTogglePin<cr>", { desc = "Pin buffer" })
@@ -83,5 +86,3 @@ keymap("n", "<leader>b6", "<cmd>BufferLineGoToBuffer 6<cr>", { desc = "Goto buff
 keymap("n", "<leader>b7", "<cmd>BufferLineGoToBuffer 7<cr>", { desc = "Goto buffer 7" })
 keymap("n", "<leader>b8", "<cmd>BufferLineGoToBuffer 8<cr>", { desc = "Goto buffer 8" })
 keymap("n", "<leader>b9", "<cmd>BufferLineGoToBuffer 9<cr>", { desc = "Goto buffer 9" })
-
-keymap("n", "<F5>", "<cmd>make<cr>", { desc = "Make" })

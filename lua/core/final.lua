@@ -28,48 +28,6 @@ vim.api.nvim_create_user_command("Trim", function()
 end, {})
 
 
----------------------------------------
--- Rename File (remain in current dir)
----------------------------------------
-vim.api.nvim_create_user_command(
-    "RenameFile",
-    function(opts)
-        local old = vim.api.nvim_buf_get_name(0)
-        if vim.bo.modified then
-            vim.notify("Save or discard changes before renaming.", vim.log.levels.ERROR)
-            return
-        end
-
-        if old == "" then
-            vim.notify("No file name associated with buffer.", vim.log.levels.ERROR)
-            return
-        end
-
-        local dir = vim.fn.fnamemodify(old, ":h")
-        local new = dir .. "/" .. opts.args
-
-        if vim.uv.fs_stat(new) then
-            vim.notify("File already exists: " .. new, vim.log.levels.ERROR)
-            return
-        end
-
-        local ok, err = os.rename(old, new)
-        if not ok then
-            vim.notify("Rename failed: " .. (err or "unknown error"), vim.log.levels.ERROR)
-            return
-        end
-
-        vim.cmd("edit " .. vim.fn.fnameescape(new))
-        vim.cmd("bdelete! #")
-        vim.notify("Renamed:\n" .. old .. "\n→ " .. new)
-    end,
-    {
-        nargs = 1,
-        complete = "file",
-        desc = "Rename current file within its current directory"
-    }
-)
-
 
 -----------------------------------------------------------------------
 --  _____                   _             _   ____  _             _
