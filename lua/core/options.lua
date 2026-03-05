@@ -1,4 +1,5 @@
 vim.opt.backup         = false  -- No backup
+vim.opt.shadafile      = "NONE"
 vim.opt.background     = "dark" --
 vim.opt.cmdheight      = 1      -- The height of the command line
 vim.opt.colorcolumn    = "9999" -- fixes indentline for now

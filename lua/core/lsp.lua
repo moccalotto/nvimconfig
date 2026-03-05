@@ -80,7 +80,6 @@ vim.api.nvim_create_autocmd("LspAttach", {
             end
         end
 
-
         vim.lsp.completion.enable(true, client.id, event.buf, {
             autotrigger = true,
             convert = function(item)
@@ -121,7 +120,6 @@ vim.api.nvim_create_autocmd("LspAttach", {
                 group = vim.api.nvim_create_augroup("lsp-detach", { clear = true }),
                 callback = function(event2)
                     vim.lsp.buf.clear_references()
-                    -- vim.api.nvim_clear_autocmds({ group = "lsp-autogroup", buffer = event2.buf })
                     vim.api.nvim_clear_autocmds({ group = autogroup, buffer = event2.buf })
                 end,
             })
